@@ -42,7 +42,7 @@
           cargoArtifacts = craneLib.buildDepsOnly {
             inherit src;
           };
-          hrtor = craneLib.buildPackage {
+          rsshttp = craneLib.buildPackage {
             inherit src cargoArtifacts;
             strictDeps = true;
 
@@ -75,14 +75,14 @@
           };
 
           packages = {
-            inherit hrtor;
-            default = hrtor;
+            inherit rsshttp;
+            default = rsshttp;
             doc = cargo-doc;
           };
 
           checks = {
             inherit
-              hrtor
+              rsshttp
               cargo-clippy
               cargo-doc
               ;
