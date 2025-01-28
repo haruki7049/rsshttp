@@ -3,7 +3,12 @@ use axum::{routing::get, Router};
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
     tracing_subscriber::fmt::fmt()
-        .with_max_level(tracing::Level::INFO)
+        .with_env_filter(
+            tracing_subscriber::EnvFilter::builder()
+                .with_default_directive(tracing_subscriber::filter::LevelFilter::INFO.into())
+                .from_env_lossy(),
+        )
+        .json()
         .init();
 
     let app = Router::new().route("/", get(root));
@@ -17,5 +22,6 @@ async fn main() -> std::io::Result<()> {
 
 #[tracing::instrument]
 async fn root() -> &'static str {
+    tracing::debug!("Serving");
     "Hello, World!!\n"
 }
