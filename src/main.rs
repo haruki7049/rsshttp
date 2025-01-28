@@ -35,9 +35,11 @@ async fn root() -> &'static str {
 
 #[derive(Parser)]
 struct CLIArgs {
+    /// Port number
     #[arg(short, long)]
     port: u32,
 
+    /// Server's IP
     #[arg(short, long)]
     ip: String,
 }
